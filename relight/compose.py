@@ -1,6 +1,9 @@
 # ------------------------------------------------------------------------------
 # File: relight/compose.py
-# Coder: Vaibhav Thalanki
+# Authors: Oliver Fritsche, Vaibhav Thalanki, Sai Manichandana Devi Thumati
+# Emails: fritsche.o@northeastern.edu, thalanki.v@northeastern.edu, thumati.sa@northeastern.edu
+# Date: 2025-10-21
+# Class: CS 7180 Advanced Perception
 # Purpose: Sepia on reflectance + linear-light recomposition (R * S)
 # ------------------------------------------------------------------------------
 
@@ -9,7 +12,7 @@ import cv2
 from utils.color import srgb_to_linear, linear_to_srgb, to_float01, to_u8
 
 def sepia_on_reflectance(R_bgr: np.ndarray, intensity: float = 0.85) -> np.ndarray:
-    """Blend classic sepia matrix over sRGB reflectance (returns BGR uint8)."""
+    """Apply sepia tone to the reflectance image using weighted RGB blending."""
     R = to_float01(R_bgr)  # sRGB
     rgb = cv2.cvtColor((R*255).astype(np.uint8), cv2.COLOR_BGR2RGB).astype(np.float32)/255.0
     M = np.array([[0.393, 0.769, 0.189],
@@ -24,11 +27,7 @@ def compose_intrinsic_linear(R_bgr_srgb_u8: np.ndarray, S_rel_float: np.ndarray,
                              auto_expose: bool = True,
                              tgt_percentile: float = 99.0,
                              tgt_level: float = 0.98) -> np.ndarray:
-    """
-    Combine R and S in *linear* space, then tone-map back to sRGB BGR uint8.
-    Major sections:
-      (A) R: sRGB→linear; (B) normalize S median; (C) multiply; (D) auto-expose; (E) back to sRGB.
-    """
+    """Recombine reflectance and shading in linear space, tone-map to sRGB, and auto-expose."""
     # (A)
     R_srgb = cv2.cvtColor(R_bgr_srgb_u8, cv2.COLOR_BGR2RGB).astype(np.float32)/255.0
     R_lin  = srgb_to_linear(R_srgb)
