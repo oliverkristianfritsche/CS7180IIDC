@@ -1,6 +1,9 @@
 # ------------------------------------------------------------------------------
 # File: run_pipeline.py
-# Coder: Vaibhav Thalanki, Oliver Fritsche, Sai Manichandana
+# Authors: Oliver Fritsche, Vaibhav Thalanki, Sai Manichandana Devi Thumati
+# Emails: fritsche.o@northeastern.edu, thalanki.v@northeastern.edu, thumati.sa@northeastern.edu
+# Date: 2025-10-21
+# Class: CS 7180 Advanced Perception
 # Purpose: CLI to run intrinsic decomposition + sepia + relighting (chosen mode),
 #          save outputs, and display a 2×3 matplotlib summary panel.
 #          Modes supported: "point_auto", "directional_right"
@@ -27,7 +30,7 @@ def norm01(x: np.ndarray) -> np.ndarray:
 # ----------------------------- core runner ------------------------------------
 def run_pipeline_cli(
     image_path: str,
-    mode: str = "point_auto",         # "point_auto" | "directional_right"
+    mode: str = "point_auto",         
     out_dir: str = "./outputs",
     k_clusters: int = 10,
     n_segments: int = 600,
@@ -95,13 +98,23 @@ def run_pipeline_cli(
     I_rgb       = cv2.cvtColor(I_bgr,   cv2.COLOR_BGR2RGB)
 
     plt.figure(figsize=(16, 10))
-    plt.subplot(2, 3, 1); plt.imshow(R_orig_rgb);             plt.title('Reflectance (original)'); plt.axis('off')
-    plt.subplot(2, 3, 2); plt.imshow(R_sepia_rgb);            plt.title('Reflectance (sepia)');    plt.axis('off')
-    plt.subplot(2, 3, 3); plt.imshow(S_orig_vis, cmap='gray');plt.title('Shading (original)');    plt.axis('off')
-    plt.subplot(2, 3, 4); plt.imshow(S_rel_vis,  cmap='gray');plt.title(f'Shading (relit: {mode})'); plt.axis('off')
-    plt.subplot(2, 3, 5); plt.imshow(I_rgb);                  plt.title('Combined');               plt.axis('off')
-    plt.subplot(2, 3, 6); plt.imshow(S_delta, cmap='gray');   plt.title('Shading change');         plt.axis('off')
-    plt.tight_layout(); plt.show()
+    plt.subplot(2, 3, 1); plt.imshow(R_orig_rgb);             
+    plt.title('Reflectance (original)'); plt.axis('off')
+    plt.subplot(2, 3, 2); plt.imshow(R_sepia_rgb);            
+    plt.title('Reflectance (sepia)');    plt.axis('off')
+    plt.subplot(2, 3, 3); plt.imshow(S_orig_vis, cmap='gray');
+    plt.title('Shading (original)');    
+    plt.axis('off')
+    plt.subplot(2, 3, 4); plt.imshow(S_rel_vis,  cmap='gray');
+    plt.title(f'Shading (relit: {mode})'); plt.axis('off')
+    plt.subplot(2, 3, 5); plt.imshow(I_rgb);                  
+    plt.title('Combined');               
+    plt.axis('off')
+    plt.subplot(2, 3, 6); plt.imshow(S_delta, cmap='gray');   
+    plt.title('Shading change');         
+    plt.axis('off')
+    plt.tight_layout(); 
+    plt.show()
 
     return {"R_bgr": R_bgr, "S_vis": S_vis, "R_sepia": R_sepia, "S_rel": S_rel, "I_bgr": I_bgr, "out_dir": out_dir}
 

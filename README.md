@@ -50,6 +50,10 @@ This project implements an intrinsic image decomposition pipeline inspired by [G
 ## Usage
 
 ```bash
+pip install -r ./requirements.txt
+```
+
+```bash
 python run_pipeline.py <image_path> [options]
 ```
 
@@ -62,7 +66,7 @@ python run_pipeline.py <image_path> [options]
 
 **Example:**
 ```bash
-python run_pipeline.py input_image3.jpg --mode point_auto --out_dir ./outputs
+python run_pipeline.py ./inputs/input_image3.jpg --mode point_auto --out_dir ./outputs
 ```
 
 The script generates decomposition and relighting results in the specified output directory.
@@ -74,6 +78,7 @@ intrinsic/          # Decomposition module
 relight/            # Relighting modules (point, directional, compose)
 utils/              # Color space utilities
 outputs/            # Generated results
+inputs/            # 5 chosen input images
 ```
 
 ## Parameters

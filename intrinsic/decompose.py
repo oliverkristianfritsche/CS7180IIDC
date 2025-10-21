@@ -1,6 +1,9 @@
 # ------------------------------------------------------------------------------
 # File: intrinsic/decompose.py
-# Coder: Vaibhav Thalanki, Oliver Fritsche
+# Authors: Oliver Fritsche, Vaibhav Thalanki, Sai Manichandana Devi Thumati
+# Emails: fritsche.o@northeastern.edu, thalanki.v@northeastern.edu, thumati.sa@northeastern.edu
+# Date: 2025-10-21
+# Class: CS 7180 Advanced Perception
 # Purpose: Intrinsic image decomposition via superpixels+clustering (Garces et al.)
 # ------------------------------------------------------------------------------
 
